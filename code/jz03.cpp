@@ -1,5 +1,6 @@
 //jz03 reverse a linked list
 //stack solution
+//输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
 class Solution {
 public:
     vector<int> printListFromTailToHead(ListNode* head) {
