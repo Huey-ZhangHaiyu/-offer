@@ -14,10 +14,10 @@ public:
         if(pHead==NULL||pHead->next==NULL){
             return pHead;
         }
-        ListNode* pReverseNode=ReverseList(pHead->next);
+        ListNode* p=ReverseList(pHead->next);
         pHead->next ->next=pHead;
         pHead->next=NULL;
 
-        return pReverseNode;
+        return p;
     }
 };
