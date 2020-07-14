@@ -1,9 +1,9 @@
 //求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
 //这题想考察的是什么？是程序短路！
-//这才是正确答案
+//这才是正确答案，逻辑与有个短路特点，前面为假，后面不计算
 public int Sum_Solution(int n) {
         int sum = n;
-        boolean ans = (n>0)&&((sum+=Sum_Solution(n-1))>0);
+        n&&((sum+=Sum_Solution(n-1))>0);
         return sum;
     }
     
