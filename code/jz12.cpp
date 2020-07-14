@@ -4,7 +4,7 @@
 class Solution {
 public:
     double Power(double base, int exponent) {
-        double e=1.0; 
+        double e=1.0; //这里一定要double，因为结果可能是小数
         int n=abs(exponent);
         if(base==0) return 0;
         if(exponent==0) return 1;
@@ -13,6 +13,6 @@ public:
             base*=base;// 翻倍
             n>>=1;// 右移一位
         }
-        return exponent>=0?e:(1/e);
+        return exponent>0?e:(1/e);
     }
 };
