@@ -21,8 +21,8 @@ public:
 这个时候如果我们再把原来的整数和减去1之后的结果做与运算，从原来整数最右边一个1那一位开始所有位都会变成0
 相当于扣除了最后一个1，用这种方法控制循环就行了
 */
-public class Solution {
-    public int NumberOf1(int n) {
+class Solution {
+    public: int NumberOf1(int n) {
         int count = 0;
         while(n!= 0){
             count++;
@@ -30,4 +30,4 @@ public class Solution {
          }
         return count;
     }
-}
+};
