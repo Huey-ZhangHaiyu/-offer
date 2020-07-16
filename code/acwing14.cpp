@@ -9,14 +9,14 @@
 class Solution {
 public:
     int duplicateInArray(vector<int>& nums) {
-        int l=1,r=nums.size();//数值范围1-n
+        int l=1,r=nums.size()-1;//数值范围1-n
         while(l<r){
             int mid=l+r>>1;
             int count = 0;
             for(auto x:nums){
                 if(x>0&&x<=mid) count++;//找出小于mid的个数
             }
-            if(count>mid+l-1) r=mid;
+            if(count>mid-l+1) r=mid;
             else l=mid+1;
         }
         return r;
