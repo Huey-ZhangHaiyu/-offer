@@ -20,7 +20,7 @@ public:
         for(int i=0;i<length;i++){
             if(numbers[i]!=i){
                 while(numbers[i]!=numbers[numbers[i]]) swap(numbers[i],numbers[numbers[i]]);
-                if(numbers[numbers[i]]==i){
+                if(numbers[numbers[i]]!=i){
                     duplication=&numbers[i];
                     return true;
                 }
