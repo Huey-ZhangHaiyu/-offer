@@ -7,6 +7,23 @@
 左下角的右边单调递增，上面一列单调递减，所以可以用左下角作为分割条件，一行一行排除
 右上角同理
 */
+//c++11
+class Solution {
+public:
+    bool searchArray(vector<vector<int>> array, int target) {
+        if(array.empty()||array[0].empty()) return false;//要先判断这个，因为如果是空数组
+        int x=array[0].size(),y=array.size();//array[0]就不存在，所以x会报错
+        int i=0; int j=y-1;
+        while(i<x&&j>=0){
+            if(array[i][j]==target) return true;
+            if(array[i][j]<target) i++;
+            else j--;
+        }
+        return false;
+    }
+};
+
+//c++98
 class Solution {
 public:
     bool Find(int target, vector<vector<int> > array) {
