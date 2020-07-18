@@ -1,6 +1,20 @@
 //replace space in char-string
 //请实现一个函数，将一个字符串中的每个空格替换成“%20”。
 //例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+//c++11
+class Solution {
+public:
+    string replaceSpaces(string &str) {
+        string s;
+        for(auto x:str){
+            if(x==' ') s+="%20";
+            else s+=x;
+        }
+        return s;
+    }
+};
+
+//
 class Solution {
 public:
 	void replaceSpace(char *str,int length) {
