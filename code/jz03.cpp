@@ -1,38 +1,46 @@
 //jz03 reverse a linked list
 //stack solution
 //输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+
+//recrusion
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    vector<int> printListFromTailToHead(ListNode* head) {
-        vector<int> value;
-        ListNode *p=NULL;
-        p=head;
-        stack<int> stk;
-        while(p!=NULL){
-            stk.push(p->val);
-            p=p->next;
+    vector<int> temp;
+    vector<int> printListReversingly(ListNode* head) {
+        if(head){//head空的话，pushback的参数就无效了；
+            if(head->next){
+            printListReversingly(head->next);
+            }
+            temp.push_back(head->val);
         }
-        while(!stk.empty()){
-            value.push_back(stk.top());
-            stk.pop();
-        }
-        return value;
+        return temp;
     }
 };
 
-//recrusion
+//反向迭代器
 class Solution {
 public:
-    vector<int> value;
-    vector<int> printListFromTailToHead(ListNode* head) {
-        ListNode *p=NULL;
-        p=head;
-        if(p!=NULL){
-            if(p->next!=NULL){
-                printListFromTailToHead(p->next);
-            }
-            value.push_back(p->val);
+    vector<int> printListReversingly(ListNode* head) {
+        vector<int> res;
+        while (head) {
+            res.push_back(head->val);
+            head = head->next;
         }
-        return value;            
-        }
+        return vector<int>(res.rbegin(), res.rend());
+    }
 };
+
+//反向迭代器输出逆序遍历
+vector<int>::reverse_iterator iter = vecInt.rbegin();
+for (; iter != vecInt.rend(); ++iter)
+{
+	cout << *iter << endl;
+}
