@@ -6,8 +6,8 @@ public:
      int  NumberOf1(int n) {
          int i=0;
          int flag=1;
-         while(flag!=0){
-             if((n&flag)!=0) i++;//注意这里的&运算要带上括号
+         while(flag){//int类型一共32位，左移到31次时变成负数，左移第32次会溢出变0，而直接左移32位为1(相当于没移动)
+             if(n&flag) i++;
              flag<<=1;//把1左移
          }
          return i;
