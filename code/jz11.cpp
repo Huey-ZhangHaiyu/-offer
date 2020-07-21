@@ -13,6 +13,16 @@ public:
          return i;
      }
 };
+//强制转换成无符号类型
+class Solution {
+public:
+    int NumberOf1(int n) {
+        int res = 0;
+        unsigned int un = n; 
+        while (un) res += un & 1, un >>= 1;
+        return res;
+    }
+};
 
 //更巧妙的解法：
 /*
