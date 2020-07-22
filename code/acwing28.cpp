@@ -18,7 +18,7 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        node->val=node->next->val;
-        node->next=node->next->next;
+        node->val=node->next->val;//这两句有更狠的做法
+        node->next=node->next->next;//写成这样：*node = *(node->next);
     }
 };
