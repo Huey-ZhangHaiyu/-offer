@@ -6,6 +6,7 @@
 //所以两者相遇的时候，s在环里走了(b-a)，也就是距离环出口a的地方
 //让一个指针在相遇点，另一个指针从头出发，速度相同，相遇点即为入口
 
+//第一次写
 class Solution {
 public:
     ListNode* EntryNodeOfLoop(ListNode* pHead)
@@ -28,5 +29,27 @@ public:
             slow=slow->next;
         }
         return slow;
+    }
+};
+
+//第二次写
+class Solution {
+public:
+    ListNode *entryNodeOfLoop(ListNode *head) {
+        if(!head||!head->next||!head->next->next) return NULL;
+        auto s=head->next,f=head->next->next;
+        while(s->val!=f->val){
+            if(!f->next||!f->next->next) return NULL;
+            else{
+                s=s->next;
+                f=f->next->next;
+            }
+        }
+        s=head;
+        while(s->val!=f->val){
+            s=s->next;
+            f=f->next;
+        }
+        return f;
     }
 };
