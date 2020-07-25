@@ -30,9 +30,9 @@ public:
                 if(t->left) q.push(t->left);
                 if(t->right) q.push(t->right);
             }
-            else if(q.size()){//加条件防止只有最后一个null的时候
-            //因为循环一开始null被pop出去了，此时数组长度为空，如果再不停的push进去null，则会死循环
-                q.push(NULL);//数组里有null，长度不为零
+            else {
+                //因为循环一开始最后一个元素会被pop出去，此时数组长度为空，如果再不停的push进去null，则会死循环
+                if(q.size()) q.push(NULL);//加条件防止只有null的时候
                 res.push_back(level);
                 level.clear();
             }
