@@ -26,5 +26,30 @@ public:
     }
 };
 
-//或者像acwing题一样，利用排序可以知道中序遍历结果
+//或者像acwing18题一样，利用排序可以知道中序遍历结果
 //这道题就变成了已知中序遍历和后序遍历结果，重建二叉树
+//我也不知道为什么这个代码不对。。
+class Solution {
+public:
+    vector<int> inorder,postorder;
+    unordered_map<int,int> pos;
+    bool verifySequenceOfBST(vector<int> sequence) {
+        postorder=sequence;
+        inorder=sequence;
+        sort(inorder.begin(),inorder.end());
+        for(int i=0;i<inorder.size();i++){
+            pos[inorder[i]]=i;
+        }
+        return dfs(inorder,postorder,0,inorder.size()-1,0,postorder.size()-1);
+    }
+    
+    bool dfs(vector<int>&inorder, vector<int>&postorder,int il,int ir,int pl,int pr){
+        if(il>=ir) return true;
+        int root=postorder[pr];
+        int k=pos[root];
+        for(int i=pl;i<pl+(k-il);i++){
+            if(postorder[i]>root) return false;
+        }
+        return dfs(inorder,postorder,il,il+k-1,pl,pl+(k-il)-1)&&dfs(inorder,postorder,il+k+1,ir,pl+(k-il),pr-1);
+    }
+};
