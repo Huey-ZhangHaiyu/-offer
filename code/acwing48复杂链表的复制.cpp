@@ -42,19 +42,21 @@ public:
 
 //或者用空间换时间：哈希表
 /*
-使用hash存储 key = 源链表节点，value = 目标链表节点，遍历源链表，判断每个节点和random节点是否在hash表中，如果不存在则创建
+将原链表和新链表的值一一对应
+使用hash存储 key = 源链表节点，value = 目标链表节点
+遍历源链表，判断每个节点和random节点是否在hash表中，如果不存在则创建
 */
 class Solution {
 public:
     ListNode *copyRandomList(ListNode *head) {
         unordered_map<ListNode*, ListNode*> hash;
-        hash[nullptr] = nullptr;
+        hash[nullptr] = nullptr;//空hash,hash[NULL]=NULL;
         auto dup = new ListNode(-1), tail = dup;
 
         while(head)
         {
-            if(!hash.count(head)) hash[head] = new ListNode(head->val);
-            if(!hash.count(head->random)) hash[head->random] = new ListNode(head->random->val);
+            if(!hash.count(head)) hash[head] = new ListNode(head->val);//原链表head对应新链表val
+            if(!hash.count(head->random)) hash[head->random] = new ListNode(head->random->val);//原链表的random对应新链表的random->val
 
             tail->next = hash[head];
             tail->next->random = hash[head->random];
