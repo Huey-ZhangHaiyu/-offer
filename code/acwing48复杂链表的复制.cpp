@@ -55,8 +55,8 @@ public:
 
         while(head)
         {
-            if(!hash.count(head)) hash[head] = new ListNode(head->val);//原链表head对应新链表val
-            if(!hash.count(head->random)) hash[head->random] = new ListNode(head->random->val);//原链表的random对应新链表的random->val
+            if(!hash.count(head)) hash[head] = new ListNode(head->val);//原链表head对应指向val的new
+            if(!hash.count(head->random)) hash[head->random] = new ListNode(head->random->val);//原链表的random对应新链表指向random->val的new
 
             tail->next = hash[head];
             tail->next->random = hash[head->random];
