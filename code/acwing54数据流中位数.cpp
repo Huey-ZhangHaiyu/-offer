@@ -35,3 +35,29 @@ public:
 如果大根顶大于小根顶，两者呼唤即可
 然后再注意一下大根堆的长度
 */
+//直接插大根堆，不对的话再去调整的思想很重要，因为本来就需要这么多的时间去判断，
+//但是直接蒙一个的话，就有百分之50几率正确，就占到了便宜
+class Solution {
+public:
+
+    priority_queue<int> max_heap;
+    priority_queue<int, vector<int>, greater<int>> min_heap;
+
+    void insert(int num){
+        max_heap.push(num);//直接插大根堆
+        while (min_heap.size() && min_heap.top() < max_heap.top()){//大根堆的头比小根堆大，需要互换
+            auto minv = min_heap.top(), maxv = max_heap.top();
+            min_heap.pop(), max_heap.pop();
+            max_heap.push(minv), min_heap.push(maxv);
+        }
+        if (max_heap.size() > min_heap.size() + 1){//如果两个堆大小不平衡
+            min_heap.push(max_heap.top());
+            max_heap.pop();
+        }
+    }
+
+    double getMedian(){
+        if (max_heap.size() + min_heap.size() & 1) return max_heap.top();
+        return (max_heap.top() + min_heap.top()) / 2.0;
+    }
+};
