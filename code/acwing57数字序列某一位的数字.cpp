@@ -15,7 +15,8 @@
 */
 class Solution {
 public:
-    int digitAtIndex(int n) {
+    int digitAtIndex(int n) {//注意返回是int，所以最多2^10
+        //s每次要*10，int一共2^10，所以防止超范围用long long
         long long base=1,digit=1,s=9;//s为当前digit的数字个数
         
         if(n==0) return 0;
