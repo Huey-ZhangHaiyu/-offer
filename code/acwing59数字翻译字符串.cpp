@@ -20,7 +20,7 @@ class Solution {
 public:
     int getTranslationCount(string s) {
         int n=s.size();
-        vector<int> f(n+1);//从长度为0记录到长度为n
+        vector<int> f(n+1);//从长度为1开始判断不会向下越界，加上0的情况，一共n+1
         f[0]=1;
         for(int i=1;i<n+1;i++){
             f[i]=f[i-1];
