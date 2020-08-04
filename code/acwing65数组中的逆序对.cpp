@@ -5,3 +5,20 @@
 输出：6
 */
 //先自己写一个试试
+//双指针暴力做法
+class Solution {
+public:
+    int inversePairs(vector<int>& nums) {
+        int i,j;
+        int count=0;
+        int n=nums.size();
+        for(i=0;i<n;i++){
+            for(j=i+1;j<n;j++){
+                if(nums[i]>nums[j]) count ++;
+            }
+        }
+        return count;
+    }
+};
+
+//大佬，经典题目
