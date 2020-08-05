@@ -23,19 +23,39 @@ public:
 
 //大佬，经典题目
 /*
-用归并排序顺便解决这个问题
+首先想到的暴力一定不是面试官想要的，比暴力更快一点的复杂度为nlogn，怎么才会有logn出现呢
+一半一半就会有logn出现，用归并排序顺便解决这个问题
 归并排序拆成左右两个区间，那么存在的逆序对就是左边的逆序+右逆序+跨越区间的逆序
-首先想到的暴力一定不是面试官想要的，暴力的复杂度为n平方
-那么比暴力更快一点的复杂度为nlogn，怎么才会有logn出现呢
-一半一半就会有logn出现
-怎么样把一半一半用到这道题上呢
-将数组[1,2,3,4,5,6,0]对半切，变成arr1=[1,2,3,4]和arr2=[5,6,0]
-将arr1里的1和arr2的5做比较，发现1<5，要是arr2里的0是7或者8就好了，这样1就比arr2里的所有数字都小了呢，就不存在逆序对了
-那么假设arr2排过序了是[0,5,6],刚好arr1目前也是排过序的
-1、arr1里的1是大于arr2里的0的，那么arr1里1且其之后的所有数字都比0大，则对于0来说，有4个数字比它大，所以结果变量+4,0被arr1里的所有数字都比较过了（也不是一个个遍历比较，而是用了有序的性质），0就可以被丢弃了（实际上是放到归并排序的临时数组里了）
-2、此时1是小于5的，那么可以断定1比arr2里的所有数字都小，也可以把1和之前的0一样处理掉
-3、现在arr1=[2,3,4] arr2=[5,6],2小于5，所以2比arr2里的都要小，丢弃，一直循环下去，4也被丢掉，逆序对完成
-
-所以解法就是归并排序，只加了一行res+=mid-i+1;
-递归里面运行完两个mergeSort后，start~mid 和 mid+1~end都是有序的，且两个内部的逆序对都已经算过了，只需要算当前状态的逆序对就行了，不会重复的
+又因为归并排序的递归过程中，左右两段都是单调的，且两个内部的逆序对都已经算过了，只需要算当前状态的逆序对就行了，不会重复的
+所以当左边的i得到nums[i]比右边找到的nums[j]大的时候，左边i之后的数也一定比nums[j]大
+此时针对nums[j]一个数的跨区间逆序对个数即为mid-i+1；
 */
+class Solution {
+public:
+    int inversePairs(vector<int>& nums) {
+        return merge(nums,0,nums.size()-1);    
+    }
+    
+    int merge(vector<int>& nums,int l,int r){
+        if(l>=r) return 0;
+        int mid=l+r>>1;
+        int res=merge(nums,l,mid)+merge(nums,mid+1,r);//先把左右单独的逆序对算出来
+        
+        int i=l,j=mid+1;
+        vector<int> temp;//记录排序结果
+        while(i<=mid&&j<=r){
+            if(nums[i]<=nums[j]) temp.push_back(nums[i++]);//一直在两边找
+            else{//直到找到左边比右边大的
+                temp.push_back(nums[j++]);
+                res+=mid-i+1;//记一下针对此时nums[j]出现的跨区间逆序对
+            }        
+        }
+        while(i<=mid) temp.push_back(nums[i++]);//把后面的接上
+        while(j<=r) temp.push_back(nums[j++]);
+        
+        i=l;
+        for(auto x:temp) nums[i++]=x;//将排序后的结果给回nums
+        
+        return res;
+    }
+};
