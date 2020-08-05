@@ -1,7 +1,7 @@
 //统计一个数字在排序数组中出现的次数。
 //例如输入排序数组[1, 2, 3, 3, 3, 3, 4, 5]和数字3，由于3在这个数组中出现了4次，因此输出4。
 
-//我的答案
+//我的答案，显然O(n)不是想要的
 class Solution {
 public:
     int getNumberOfK(vector<int>& nums , int k) {
@@ -19,7 +19,7 @@ public:
 class Solution {
 public:
     int getNumberOfK(vector<int>& A , int k) {
-        if(!A.size()) return 0;
+        if(A.empty()) return 0;
 
         int l1 = 0, r1 = A.size() - 1;
         while(l1 < r1)
