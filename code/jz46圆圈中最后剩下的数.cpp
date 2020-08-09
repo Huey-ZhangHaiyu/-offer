@@ -3,6 +3,7 @@
 //从他的下一个小朋友开始,继续0...m-1报数....直到剩下最后一个小朋友得到礼品
 //(注：小朋友的编号是从0到n-1)
 //如果没有小朋友，返回-1
+
 //normal solution
 class Solution {
 public:
@@ -25,8 +26,30 @@ public:
         return i;
     }
 };
+//循环链表模拟
+#include<list>
+class Solution {
+public:
+    int lastRemaining(int n, int m){
+        if (n<=0||m<=0) return -1;
+	    list<int> list;
+	    for(int i=0;i<n;i++)
+		    list.push_back(i);
+ 
+	    auto p=list.begin();
+	    while (list.size()>1){
+		    for (int i=1;i<m;i++){
+			    p++;
+			    if (p==list.end()) p=list.begin();
+		    }
+            p=list.erase(p);//erase返回下一个节点的位置
+		    if (p == list.end()) p = list.begin();
+    	}
+    	return *(p);
+    }
+};
 
-//what!!?????
+//递推公式，找到重新编号与旧编号之间的关系即可
 //n个小朋友，报到m-1的人退出，那么0到(n-1)的小朋友第一个退出的一定是(m%n-1)号
 //剩下0,1,...,(m%n-1)-1,(m%n-1)+1,...n-1;
 //也就是.....,   k-1   ,    k    ,  ...;对应原序列
