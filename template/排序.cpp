@@ -1,4 +1,5 @@
 //快速排序
+//找到一个中间值，左边大于中间值的数字和右边小于中间值的数字对换
 void quick_sort(int q[], int l, int r)
 {
     if (l >= r) return;
@@ -16,12 +17,13 @@ void quick_sort(int q[], int l, int r)
 }
 
 //归并排序
+//从左右两边找比较小的那一个数存下来
 void merge_sort(int q[], int l, int r)
 {
     if (l >= r) return;
 
     int mid = l + r >> 1;
-    merge_sort(q, l, mid);
+    merge_sort(q, l, mid);//前提是两边先排序好
     merge_sort(q, mid + 1, r);
 
     int k = 0, i = l, j = mid + 1;
@@ -29,7 +31,7 @@ void merge_sort(int q[], int l, int r)
         if (q[i] <= q[j]) tmp[k ++ ] = q[i ++ ];
         else tmp[k ++ ] = q[j ++ ];
 
-    while (i <= mid) tmp[k ++ ] = q[i ++ ];
+    while (i <= mid) tmp[k ++ ] = q[i ++ ];//把后续剩下的加进来
     while (j <= r) tmp[k ++ ] = q[j ++ ];
 
     for (i = l, j = 0; i <= r; i ++, j ++ ) q[i] = tmp[j];
