@@ -3,9 +3,10 @@ vector, 变长数组，倍增的思想
     size()  返回元素个数
     empty()  返回是否为空
     clear()  清空
-    front()/back()
+    front()/back()//返回引用值
     push_back()/pop_back()
-    begin()/end()
+    //begin和end返回迭代器
+    begin()/end()//end指向最后的后一位置
     []
     支持比较运算，按字典序
 
