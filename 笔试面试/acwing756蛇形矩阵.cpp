@@ -30,27 +30,27 @@
 #include <algorithm>
 using namespace std;
 
-const int N = 100+10;
+const int N = 100+10; //养成多开几个的习惯，避免越界
 int m, n;
 int res[N][N];
 
 int main() {
     cin >> n >> m;
-    int dx[] = {0, 1, 0, -1}, dy[] = {1, 0, -1, 0};
+    int dx[] = {0, 1, 0, -1}, dy[] = {1, 0, -1, 0};//定义偏移量
     
     for(int i = 0, j = 0, num = 1, k = 0; num <= n * m; num ++){
         res[i][j] = num;
         
         int x = i + dx[k], y = j + dy[k];
         if(x < 0 || x >= n || y < 0 || y >= m || res[x][y]){
-            k = (k + 1) % 4;
+            k = (k + 1) % 4;//下一个偏移量
             x = i + dx[k], y = j + dy[k];
         }
-        i = x, j = y;
+        i = x, j = y;//更新位置
     }
     
     for(int i = 0; i < n; i ++) {
-        for(int j = 0; j < m; j ++) cout << res[i][j] << " ";
+        for(int j = 0; j < m; j ++) cout << res[i][j] << " ";//输出
         cout<<endl;
     }
     
