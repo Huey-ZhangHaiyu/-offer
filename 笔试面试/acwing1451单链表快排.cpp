@@ -27,7 +27,7 @@ public:
     }
 
     ListNode* quickSortList(ListNode* head) {
-        if (!head || !head->next) return head;
+        if (!head || !head->next) return head;//注意！！！！！
 
         auto left = new ListNode(-1), mid = new ListNode(-1), right = new ListNode(-1);
         auto ltail = left, mtail = mid, rtail = right;
