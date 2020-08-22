@@ -34,12 +34,12 @@ public:
         int val = head->val;
 
         for (auto p = head; p; p = p->next) {
-            if (p->val < val) ltail = ltail->next = p;
+            if (p->val < val) ltail = ltail->next = p;//注意这里要更新ltail位置
             else if (p->val == val) mtail = mtail->next = p;
             else rtail = rtail->next = p;
         }
 
-        ltail->next = mtail->next = rtail->next = NULL;
+        ltail->next = mtail->next = rtail->next = NULL; //注意这里！！！！！
         left->next = quickSortList(left->next);
         right->next = quickSortList(right->next);
 
