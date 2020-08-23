@@ -22,5 +22,48 @@ query()函数的调用次数不能超过 (n+2)×⌈log2n⌉+n。
 */
 
 /*
-很难的题目。
+很难的题目。二分思想
 */
+// Forward declaration of queryAPI.
+// int query(int x, int y);
+// return int means matrix[x][y].
+
+class Solution {
+public:
+    vector<int> getMinimumValue(int n) {
+        typedef long long LL;//因为数值最大为int，所以定义一个大于int的值，方便后面找极小值
+        const LL INF=1e15;
+        
+        int l=0,r=n-1;
+        while(l<r){
+            int mid=l+r>>1;
+            int k;
+            LL val=INF;//如果val只是int的话，可能val直接比目标值大，没得找
+            for(int i=0;i<n;i++){
+                int t=query(i,mid);
+                if(t<val){
+                    val=t;
+                    k=i;
+                }
+            }
+            LL left=mid?query(k,mid-1):INF;
+            LL right=mid+1<n?query(k,mid+1):INF;
+            
+            if(val<left&&val<right) return {k,mid};
+            else if(left<val) r=mid-1;//更新lr
+            else l=mid+1;
+        }
+        
+        //最后剩的一列找一下极小值即可
+        int k;
+        LL val=INF;
+        for(int i=0;i<n;i++){
+            int t=query(i,r);//这时候的lr应该相等
+            if(t<val){
+                val=t;
+                k=i;
+            }
+        }
+        return {k,r};
+    }
+};
