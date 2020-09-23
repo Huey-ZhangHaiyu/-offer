@@ -53,3 +53,25 @@ public:
         return f;
     }
 };
+
+//第三次
+class Solution {
+public:
+    ListNode *entryNodeOfLoop(ListNode *head) {
+        auto i=head;
+        auto j=head;
+        while(j&&j->next){
+            i=i->next;
+            j=j->next->next;
+            if(i==j){
+                i=head;
+                while(i!=j){
+                    i=i->next;
+                    j=j->next;
+                }
+            return i;
+            }
+        }
+        return 0;
+    }
+};
